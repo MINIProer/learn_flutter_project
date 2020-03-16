@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:learn_flutter_project/tool/network_tool/http_request.dart';
 
 main() => runApp(MyApp());
 
@@ -24,6 +25,15 @@ class JRHomeContent extends StatefulWidget {
 }
 
 class _JRHomeContentState extends State<JRHomeContent> {
+  @override
+  void initState() {
+    super.initState();
+
+    JRRequestTool.request('https://httpbin.org/get',
+        params: {'name': '张三', 'age': 18}).then((res) {
+      print(res);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -24,6 +24,24 @@ class JRHomeContent extends StatefulWidget {
 }
 
 class _JRHomeContentState extends State<JRHomeContent> {
+  @override
+  void initState() {
+    super.initState();
+
+    // 1.创建dio对象
+    Dio dio = Dio();
+
+    // 2.发送网络请求
+    dio.get('https://httpbin.org/get').then((res) {
+      print('result = $res');
+    }).catchError((err) {
+      print('error = $err');
+    });
+
+    dio.post('https://httpbin.org/post').then((res) {
+      print(res);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

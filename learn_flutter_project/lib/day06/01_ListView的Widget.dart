@@ -64,7 +64,8 @@ class JRListBuildDemo extends StatelessWidget {
         itemExtent: 64,
         itemBuilder: (BuildContext ctx, int index) {
           return Text('Hello World = ${index + 1}');
-        });
+        }
+      );
   }
 }
 

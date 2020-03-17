@@ -59,7 +59,7 @@ class JRHomeContent extends StatelessWidget {
                 trailing: Icon(Icons.delete),
               );
             },
-            childCount: 10
+            childCount: 10,
           )
         )
       ],

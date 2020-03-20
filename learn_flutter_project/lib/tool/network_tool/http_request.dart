@@ -4,9 +4,10 @@ import 'package:learn_flutter_project/tool/const_tool/const.dart';
 class JRRequestTool {
   static final baseOptions = BaseOptions(
       baseUrl: JRConstTool.http_baseUrl,
-      connectTimeout: JRConstTool.http_connect_timeout);
+      // connectTimeout: JRConstTool.http_connect_timeout 添加链接超时会导致请求失败？？？为什么？？？
+      );
 
-  static final dio = Dio(); // 如果存在Base配置，需要把baseOptions当作参数传入
+  static final dio = Dio(baseOptions); // 如果存在Base配置，需要把baseOptions当作参数传入
 
   static Future<T> request<T>(String url,
       {String method = 'get',

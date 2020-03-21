@@ -104,6 +104,7 @@ class JRHomeMovieItem extends StatelessWidget {
   }
 
   // 5.1.1 设置信息头部标题区域
+  // 注意：内部全部使用WidgetSpan来包裹内容，可以做到让内容居中对齐，
   Widget setMovieDescriptionTitle() {
     return Text.rich(
       TextSpan(children: [
@@ -193,9 +194,16 @@ class JRHomeMovieItem extends StatelessWidget {
       padding: EdgeInsets.all(10),
       color: Color.fromARGB(255, 234, 234, 234),
       width: double.infinity,
-      child: Text(
-        this.movieItem.originalTitle
-      ),
+      child: Text(this.movieItem.originalTitle),
     );
+  }
+
+  // runes -》 获取每个字符的编码
+  // String.fromCharCode(rune) -》 根据字符编码转换成字符串返回
+  void test() {
+    String str = '123123';
+    str.runes.map((rune) {
+      print(String.fromCharCode(rune));
+    });
   }
 }

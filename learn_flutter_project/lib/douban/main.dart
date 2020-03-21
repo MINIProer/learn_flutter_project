@@ -8,11 +8,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return MaterialApp(
-      theme: ThemeData(
-        splashColor: Colors.transparent, // 移除按钮水波纹
-        highlightColor: Colors.transparent // 移除按钮水波纹
-      ),
-      home: JRMainPage()
-    );
+        theme: ThemeData(
+            splashColor: Colors.transparent, // 移除按钮水波纹
+            highlightColor: Colors.transparent // 移除按钮水波纹
+            ),
+        home: JRMainPage());
   }
 }

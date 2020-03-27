@@ -6,15 +6,20 @@ main() => runApp(MyApp());
 
 // 状态管理组件
 class JRCounterWidget extends InheritedWidget {
+
+  // 1.共享数据
   final int counter;
 
+  // 2.自定义构造方法
   JRCounterWidget({this.counter, Widget child}) : super(child: child);
 
+  // 3.获取组件最近的当前InheritedWidget
   static JRCounterWidget of(BuildContext context) {
     // 沿着Element树，去找到最近的JRCounterElement，从Element中取出Widget对象
     return context.dependOnInheritedWidgetOfExactType();
   }
 
+  // 4.决定要不要回调didChangeDependencies
   // 如果返回true：执行依赖当前的InheritedWidget的State中的didChangeDependencies
   // 比钱两次数据是否存在变化，来决定是否需要执行didChangeDependencies这个方法
   @override

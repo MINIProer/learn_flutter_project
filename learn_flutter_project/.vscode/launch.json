@@ -7,7 +7,7 @@
         {
             "name": "Flutter",
             // "request": "launch",
-            "program": "/Users/jr/learn_flutter_project/learn_flutter_project/lib/douban/main.dart"
+            "program": "/Users/jr/learn_flutter_project/learn_flutter_project/lib/main.dart"
             // "/Users/jr/learn_flutter_project/learn_flutter_project/lib/main.dart"
             // "/Users/jr/learn_flutter_project/learn_flutter_project/lib/douban/main.dart",
             // "type": "dart"

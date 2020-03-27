@@ -8,7 +8,6 @@ class JRMainPage extends StatefulWidget {
 
 class _JRMainPageState extends State<JRMainPage> {
   int _currentIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

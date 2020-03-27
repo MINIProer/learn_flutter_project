@@ -3,6 +3,7 @@ import 'package:learn_flutter_project/douban/douban_widgets/common_spacing_item.
 import 'package:learn_flutter_project/douban/douban_widgets/dash_line.dart';
 import 'package:learn_flutter_project/douban/douban_widgets/star_rating.dart';
 import 'package:learn_flutter_project/douban/model/home_model/home_model.dart';
+import 'package:learn_flutter_project/tool/log_tool/log_tool.dart';
 
 class JRHomeMovieItem extends StatelessWidget {
   final MovieItem movieItem;
@@ -11,6 +12,7 @@ class JRHomeMovieItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    JRLogTool logTool = JRLogTool(StackTrace.current);
     return getMovieItemContainer();
   }
 
@@ -206,4 +208,9 @@ class JRHomeMovieItem extends StatelessWidget {
       print(String.fromCharCode(rune));
     });
   }
+
+  /**
+   * 注意：如果想要实现中间内容区&分割线&想看相关组件高度一致，可以在用row包裹，并且为了防止边界超出，可以用expanded再次包裹，
+   * 高度一致的问题，可以对row用IntrinsicHeight组件来包裹，这样就保证高度一致
+   */
 }

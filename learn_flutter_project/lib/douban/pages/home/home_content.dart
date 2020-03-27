@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:learn_flutter_project/douban/model/home_model/home_model.dart';
+import 'package:learn_flutter_project/tool/log_tool/log_tool.dart';
 import 'package:learn_flutter_project/tool/network_tool/home_network_tool/home_request.dart';
 
 import 'home_widget/home_movie_item.dart';
+import 'home_widget/home_news_single_image_item.dart';
 
 class JRHomeContent extends StatefulWidget {
   @override
@@ -18,7 +20,6 @@ class _JRHomeContentState extends State<JRHomeContent> {
     super.initState();
 
     JRHomeRequest.requestNewMovieList(0).then((res) {
-      
       setState(() {
         movies.addAll(res);
       });
@@ -28,11 +29,13 @@ class _JRHomeContentState extends State<JRHomeContent> {
 
   @override
   Widget build(BuildContext context) {
+    JRLog('homeContent', StackTrace.current);
     return Center(
         child: ListView.builder(
             itemCount: movies.length,
             itemBuilder: (ctx, index) {
               return JRHomeMovieItem(movies[index]);
+              // return JRNewsSingleImageItem(movies[index]);
             }));
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:event_bus/event_bus.dart';
 
-// EventBus 用于多组件间的数据传递
+// EventBus 用于多层组件之间的数据传递
 // 全局监听
 final eventBus = EventBus();
 

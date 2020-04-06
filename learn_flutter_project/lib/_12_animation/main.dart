@@ -1,4 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:learn_flutter_project/_12_animation/pages/image_detail.dart';
+
+import 'pages/modal_page.dart';
 
 main() => runApp(MyApp());
 
@@ -15,87 +20,63 @@ class JRHomePage extends StatefulWidget {
   _JRHomePageState createState() => _JRHomePageState();
 }
 
-class _JRHomePageState extends State<JRHomePage>
-    with SingleTickerProviderStateMixin {
-  // AnimationController
-  AnimationController _controller;
-  Animation animation;
-  Animation sizeAnimation;
-
-  @override
-  void initState() {
-    super.initState();
-
-    // 1.创建AnimationController
-    _controller = AnimationController(
-        vsync: this,
-        lowerBound: 0,
-        upperBound: 1,
-        duration: Duration(seconds: 2));
-
-    // 2.设置Curve的值
-    animation =
-        CurvedAnimation(parent: _controller, curve: Curves.elasticInOut);
-
-    // 3.设置Tween
-    sizeAnimation = Tween(begin: 50.0, end: 150.0).animate(animation);
-
-    // 4.监听动画值的改变
-    _controller.addListener(() {
-      setState(() {});
-    });
-
-    // 5.监听动画状态的改变
-    _controller.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        _controller.reverse();
-      } else if (status == AnimationStatus.dismissed) {
-        _controller.forward();
-      }
-    });
-  }
-
+class _JRHomePageState extends State<JRHomePage> {
   @override
   Widget build(BuildContext context) {
+    // TODO: implement build
     return Scaffold(
       appBar: AppBar(title: Text('首页')),
       body: Center(
-        child: Icon(
-          Icons.people,
-          size: sizeAnimation.value,
-          color: Colors.red,
+          child: GridView(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
+          childAspectRatio: 16 / 9,
         ),
-      ),
+        children: List.generate(20, (index) {
+          return GestureDetector(
+            onTapDown: (details) {
+              Navigator.of(context)
+                  .push(PageRouteBuilder(pageBuilder: (context, ani1, ani2) {
+                return FadeTransition(
+                  opacity: ani1,
+                  child: JRImageDetailPage(
+                    'https://picsum.photos/500/500?random=$index'),
+                );
+              }));
+            },
+            child: Hero(
+                tag: 'https://picsum.photos/500/500?random=$index',
+                child: Image.network(
+                    'https://picsum.photos/500/500?random=$index',
+                    fit: BoxFit.cover)),
+          );
+        }),
+      )),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          if (_controller.isAnimating) {
-            _controller.stop();
-          } else {
-            _controller.forward();
-          }
+          // <默认动画效果>
+          // Navigator.of(context).push(MaterialPageRoute(
+          //   builder: (context) {
+          //     return JRModalPage();
+          //   },
+          //   fullscreenDialog: true // 相当于iOS中的Modal页面弹出效果
+          // ));
+
+          // <自定义动画效果>
+          Navigator.of(context).push(PageRouteBuilder(
+              transitionDuration: Duration(seconds: 3),
+              pageBuilder: (ctx, animation1, animation2) {
+                return FadeTransition(
+                  opacity: animation1,
+                  child: JRModalPage(),
+                );
+              }));
+          // 注意：如果通过路由名称进行跳转，需要添加转场动画时，需要通过钩子函数来实现
         },
         child: Icon(Icons.play_arrow),
       ),
     );
   }
 }
-
-/**
-     * 1.Animation:抽象类
-     *    * 监听动画值的改变
-     *    * 监听动画状态的改变
-     *    * value
-     *    * status
-     * 2.AnimationController:继承自Animation
-     *    * vsync：同步信号（this -> with[混入语法] SingleTickerProviderStateMixin [混入到State中]）
-     *    * forward()：向前执行动画
-     *    * reverse()：反转执行动画
-     * 3.CurvedAnimation：继承自Animation
-     *    * 作用：设置动画执行的速率【速度曲线】
-     * 4.Tween：设置动画执行的value范围
-     *    * begin：开始值
-     *    * end：结束值
-     */
-// final controller = AnimationController(vsync: this);
-// final animation = CurvedAnimation(parent: controller, curve: Curves.easeInOut);
-// final valueAnimation = Tween(begin: 100, end: 200).animate(animation); // 注意animation参数值也可以替换为controller，意思就是没有假如动画曲线

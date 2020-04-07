@@ -2,12 +2,16 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:learn_flutter_project/_14_screenfit/Tools/screen_fit_tool.dart';
+import './Extensions/int_extension.dart';
+import './Extensions/double_extension.dart';
 
 main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    JRScreenFitTool.initialize();
     // 1.拿到手机的物理分辨率
     final physicalWidth = window.physicalSize.width;
     final physicalHeight = window.physicalSize.height;
@@ -52,10 +56,15 @@ class _JRHomePageState extends State<JRHomePage> {
 
     return Scaffold(
         appBar: AppBar(title: Text('首页')),
-        body: Center(
-          child: Text(
-            '屏幕适配',
-            style: TextStyle(fontSize: 30),
+        body: Container(
+          width: 200.px,
+          height: 200.0.rpx(),
+          color: Colors.red,
+          child: Center(
+            child: Text(
+              '屏幕适配',
+              style: TextStyle(fontSize: 30),
+            ),
           ),
         ));
   }
